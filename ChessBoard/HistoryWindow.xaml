@@ -1,0 +1,39 @@
+﻿<Window x:Class="ChessBoard.HistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChessBoard"
+        mc:Ignorable="d"
+        Title="HistoryWindow" Height="700" Width="520">
+    <Grid Background="#EFE0E0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Margin="10" Grid.Column="1">
+            <Label Content="Chess coaching" FontSize="36"/>
+            <Image Source="C:\Users\AzatYTebiLove\Desktop\ChessBoard\ChessBoard\Resources\Queen1.png"/>
+        </WrapPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+            <Label x:Name="TitleLabel" Content="The history of chess"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2" Grid.Column="1">
+            <WrapPanel>
+                <TextBlock x:Name="FirstParagraphTextBlock" Margin="5" Text="Chess originated from the two-player Indian war game, Chatarung, which dates back to 600 A.D. In 1000 A.D, chess spread to Europe by Persian traders. The piece next to the king was called a ferz in Persian, defined as a male counselor to the king. The Europeans concocted a more romantic imagery, and changed the ferz to a queen."></TextBlock>
+                <TextBlock x:Name="SecondParagraphTextBlock" Margin="5" Text="At that time, the queen was the weakest piece on the board. The bishop was also a short-range piece. Because the queen and bishop were so weak, the game was much slower than it is today. It took a long time for a player to develop the pieces and even longer to checkmate the enemy king."></TextBlock>
+                <TextBlock x:Name="ThirdParagraphTextBlock" Margin="5" Text="Medieval chessplayers often started out with midgame starting positions to speed up the game. Medieval chess was extremely popular. At the end of the 15th century, the rules underwent a sudden sea change. The queen transformed from the weakest piece on the board to the strongest! At the same time, the bishop became the long-range piece that it is today. These changes quickened the games pace. The battle was intensified. Mistakes were harshly punished, tabiyas were no longer necessary, and violent checkmates were executed much more often than before. The inventor of these changes is unknown; probably the new rules were not thought up by an individual, but came about from collective experimentation. These new rules were standardized by the 16th century advent of mass production and the printing press. The faster paced game was more suitable for organized play, chess notation, codified rules, and strategy books."></TextBlock>
+                <TextBlock x:Name="ForthParagraphTextBlock" Margin="5" Text="American chess was fortuitously trumpeted by founding father and chess aficionado Benjamin Franklin, who in 1750 penned The Morals of Chess. Franklins article praises the social and intellectual development that chess inspires. Franklin himself was known to while many hours away on chess, especially against beautiful women."></TextBlock>
+            </WrapPanel>
+        </ScrollViewer>
+        <WrapPanel>
+            <Button x:Name="BackButton" Width="40" Content='⏎' Click="BackButton_Click"/>
+        </WrapPanel>
+    </Grid>
+</Window>

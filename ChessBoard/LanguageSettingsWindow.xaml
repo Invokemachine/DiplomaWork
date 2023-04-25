@@ -1,0 +1,44 @@
+﻿<Window x:Class="ChessBoard.LanguageSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChessBoard"
+        mc:Ignorable="d"
+        Title="LanguageSettingsWindow" Height="700" Width="500">
+    <Grid Background="#EFE0E0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel>
+            <Button x:Name="BackButton" Content="⏎" Width="30" Click="BackButton_Click"></Button>
+        </WrapPanel>
+        <WrapPanel Grid.Row="0" Margin="10" Grid.Column="1">
+            <Label Content="Chess coaching" FontSize="36"/>
+            <Image Source="C:\Users\AzatYTebiLove\Desktop\ChessBoard\ChessBoard\Resources\Queen1.png"></Image>
+        </WrapPanel>
+        <StackPanel Grid.Row="1"  Grid.ColumnSpan="3" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="EnglishButton" Content="English" Width="250" Click="EnglishButton_Click"></Button>
+                <Image Source="C:\Users\AzatYTebiLove\Desktop\ChessBoard\ChessBoard\Resources\Flag_of_the_United_Kingdom.png" Height="50" Width="70" Stretch="Fill"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="RussianButton" Content="Russian (русский)" Width="250" Click="RussianButton_Click"></Button>
+                <Image Source="C:\Users\AzatYTebiLove\Desktop\ChessBoard\ChessBoard\Resources\Flag_of_Russia.png" Height="50" Width="70" Stretch="Fill"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="KoreanButton" Content="Korean (한국어)" Width="250" Click="KoreanButton_Click"></Button>
+                <Image Source="C:\Users\AzatYTebiLove\Desktop\ChessBoard\ChessBoard\Resources\Flag_of_South_Korea.png" Height="50" Width="70" Stretch="Fill"/>
+            </StackPanel>
+        </StackPanel>
+        <WrapPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
+            <TextBlock x:Name="NotificationTextBlock" HorizontalAlignment="Center" TextAlignment="Center" Text="App has got only 3 languages yet but some new ones will be probably added in the next updates. In some languages translations may be slightly different however every piece of information saves the original meaning."></TextBlock>
+        </WrapPanel>
+    </Grid>
+</Window>
