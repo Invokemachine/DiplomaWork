@@ -1,0 +1,38 @@
+﻿<Window x:Class="ChessBoard.RulesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChessBoard"
+        mc:Ignorable="d"
+        Title="RulesWindow" Height="700" Width="520">
+    <Grid Background="#EFE0E0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Margin="10" Grid.Column="1">
+            <Label Content="Chess coaching" FontSize="36"/>
+            <Image Source="C:\Users\AzatYTebiLove\Desktop\ChessBoard\ChessBoard\Resources\Queen1.png"></Image>
+        </WrapPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label x:Name="TitleLabel" Content="Choose the level for yourself:" HorizontalAlignment="Center"/>
+            <Button x:Name="HowToPlayButton" Content="How to play"></Button>
+            <Button x:Name="BeginnerTheoryButton" Content="Beginner"></Button>
+            <Button x:Name="IntermediateTheoryButton" Content="Intermidiate"></Button>
+            <Button x:Name="AdvancedTheoryButton" Content="Advanced"></Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="2">
+            <Image Source="C:\Users\AzatYTebiLove\Desktop\ChessBoard\ChessBoard\Resources\ChessPieces.png" HorizontalAlignment="Center" Stretch="Fill"></Image>
+        </StackPanel>
+        <WrapPanel>
+            <Button x:Name="BackButton" Width="40" Content='⏎' Click="BackButton_Click"/>
+        </WrapPanel>
+    </Grid>
+</Window>

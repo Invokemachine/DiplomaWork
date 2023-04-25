@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "ChessBoard/1.0.0": {
+        "dependencies": {
+          "System.Speech": "8.0.0-preview.3.23174.8"
+        },
+        "runtime": {
+          "ChessBoard.dll": {}
+        }
+      },
+      "System.Speech/8.0.0-preview.3.23174.8": {
+        "runtime": {
+          "lib/netstandard2.0/System.Speech.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "8.0.23.17408"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ChessBoard/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Speech/8.0.0-preview.3.23174.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2jRr0Oig3W3iyuDE/4Jq9SfyfX0/SrfZp+6RnIhgyr0VtRL7AwP573rzTTderoUK7rLBPa9SSP6/myxWfkWUng==",
+      "path": "system.speech/8.0.0-preview.3.23174.8",
+      "hashPath": "system.speech.8.0.0-preview.3.23174.8.nupkg.sha512"
+    }
+  }
+}
