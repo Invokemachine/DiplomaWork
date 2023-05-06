@@ -74,6 +74,7 @@ namespace ChessBoard
                     cell.State = activeCell.State;
                     activeCell.State = State.Empty;
                     DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                    SwitchPlayer();
                 }
             }
             else if (activeCell == null)
@@ -198,6 +199,7 @@ namespace ChessBoard
                             }
                         }
                         break;
+
                     case State.WhiteKing:
                         i = cell.RowNumber;
                         j = cell.ColumnNumber;
@@ -230,6 +232,7 @@ namespace ChessBoard
                             Board._area[cell.RowNumber - 1, cell.ColumnNumber].PossibleMove = true;
                         }
                         break;
+
                     case State.WhiteKnight:
                         if (cell != null)
                         {
@@ -477,38 +480,359 @@ namespace ChessBoard
                         break;
 
                     default:
-                        MessageBox.Show("Ima black boober");
                         break;
                 }
             }
             else
             {
-                switch (cell.State)
+                int i, j;
+                if (CurrentPlayer != 1)
                 {
-                    case State.BlackBishop:
-                        MessageBox.Show("Ima bishop");
-                        break;
-                    case State.BlackKing:
-                        MessageBox.Show("Ima king");
-                        break;
-                    case State.BlackPawn:
-                        MessageBox.Show("Ima pawn");
+                    switch (cell.State)
+                    {
+                        case State.BlackBishop:
+                            if (InsideBorder(cell.RowNumber, cell.ColumnNumber) == true)
+                            {
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i >= 0 && j < 8 && InsideBorder(i, j) == true; i--, j++)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[i, j].PossibleMove = true;
+                                    else if (i == cell.RowNumber && j == cell.ColumnNumber)
+                                    {
+                                        Board._area[i, j].PossibleMove = false;
+                                    }
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        i = i - 8;
+                                }
 
-                        break;
-                    case State.BlackKnight:
-                        MessageBox.Show("Ima knight");
-                        break;
-                    case State.BlackRook:
-                        MessageBox.Show("Ima rook");
-                        break;
-                    case State.BlackQueen:
-                        MessageBox.Show("Ima queen");
-                        break;
-                    case State.Empty:
-                        break;
-                    default:
-                        MessageBox.Show("Ima white boober");
-                        break;
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i >= 0 && j >= 0 && InsideBorder(i, j); i--, j--)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[i, j].PossibleMove = true;
+                                    else if (i == cell.RowNumber && j == cell.ColumnNumber)
+                                    {
+                                        Board._area[i, j].PossibleMove = false;
+                                    }
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        i = i - 8;
+                                }
+
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i < 8 && j < 8 && InsideBorder(i, j) == true; i++, j++)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[i, j].PossibleMove = true;
+                                    else if (i == cell.RowNumber && j == cell.ColumnNumber)
+                                    {
+                                        Board._area[i, j].PossibleMove = false;
+                                    }
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        i = i + 8;
+                                }
+
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i < 8 && j >= 0 && InsideBorder(i, j) == true; i++, j--)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[i, j].PossibleMove = true;
+                                    else if (i == cell.RowNumber && j == cell.ColumnNumber)
+                                    {
+                                        Board._area[i, j].PossibleMove = false;
+                                    }
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        i = i + 8;
+                                }
+                            }
+                            break;
+                        case State.BlackKing:
+                            i = cell.RowNumber;
+                            j = cell.ColumnNumber;
+                            if (InsideBorder(i - 1, j) == true && Board._area[i - 1, j].State == State.Empty)
+                                Board._area[i - 1, j].PossibleMove = true;
+                            if (InsideBorder(i + 1, j) == true && Board._area[i + 1, j].State == State.Empty)
+                                Board._area[i + 1, j].PossibleMove = true;
+                            if (InsideBorder(i, j - 1) == true && Board._area[i, j - 1].State == State.Empty)
+                                Board._area[i, j - 1].PossibleMove = true;
+                            if (InsideBorder(i, j + 1) == true && Board._area[i, j + 1].State == State.Empty)
+                                Board._area[i, j + 1].PossibleMove = true;
+                            if (InsideBorder(i - 1, j - 1) == true && Board._area[i - 1, j - 1].State == State.Empty)
+                                Board._area[i - 1, j - 1].PossibleMove = true;
+                            if (InsideBorder(i + 1, j + 1) == true && Board._area[i + 1, j + 1].State == State.Empty)
+                                Board._area[i + 1, j + 1].PossibleMove = true;
+                            if (InsideBorder(i - 1, j + 1) == true && Board._area[i - 1, j + 1].State == State.Empty)
+                                Board._area[i - 1, j + 1].PossibleMove = true;
+                            if (InsideBorder(i + 1, j - 1) == true && Board._area[i + 1, j - 1].State == State.Empty)
+                                Board._area[i + 1, j - 1].PossibleMove = true;
+                            break;
+
+                        case State.BlackPawn:
+                            if (InsideBorder(cell.RowNumber + 1, cell.ColumnNumber) == true && cell.RowNumber == 1)
+                            {
+                                Board._area[cell.RowNumber + 1, cell.ColumnNumber].PossibleMove = true;
+                                Board._area[cell.RowNumber + 2, cell.ColumnNumber].PossibleMove = true;
+                            }
+                            else if (InsideBorder(cell.RowNumber + 1, cell.ColumnNumber) == true && cell.RowNumber != 1 && Board._area[cell.RowNumber + 1, cell.ColumnNumber].State == State.Empty)
+                            {
+                                Board._area[cell.RowNumber + 1, cell.ColumnNumber].PossibleMove = true;
+                            }
+                            break;
+
+                        case State.BlackKnight:
+                            if (cell != null)
+                            {
+                                if (InsideBorder(cell.RowNumber + 2, cell.ColumnNumber + 1) == true)
+                                {
+                                    WhichPlayersPiece(cell, cell.RowNumber + 2, cell.ColumnNumber + 1);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty)
+                                        Board._area[cell.RowNumber + 2, cell.ColumnNumber + 1].PossibleMove = true;
+                                    else
+                                        Board._area[cell.RowNumber + 2, cell.ColumnNumber + 1].PossibleMove = false;
+                                }
+
+                                if (InsideBorder(cell.RowNumber + 2, cell.ColumnNumber - 1) == true)
+                                {
+                                    WhichPlayersPiece(cell, cell.RowNumber + 2, cell.ColumnNumber - 1);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty)
+                                        Board._area[cell.RowNumber + 2, cell.ColumnNumber - 1].PossibleMove = true;
+                                    else
+                                        Board._area[cell.RowNumber + 2, cell.ColumnNumber - 1].PossibleMove = false;
+                                }
+
+                                if (InsideBorder(cell.RowNumber - 2, cell.ColumnNumber - 1) == true)
+                                {
+                                    WhichPlayersPiece(cell, cell.RowNumber - 2, cell.ColumnNumber - 1);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty)
+                                        Board._area[cell.RowNumber - 2, cell.ColumnNumber - 1].PossibleMove = true;
+                                    else
+                                        Board._area[cell.RowNumber - 2, cell.ColumnNumber - 1].PossibleMove = false;
+                                }
+
+                                if (InsideBorder(cell.RowNumber - 2, cell.ColumnNumber + 1) == true)
+                                {
+                                    WhichPlayersPiece(cell, cell.RowNumber - 2, cell.ColumnNumber + 1);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty)
+                                        Board._area[cell.RowNumber - 2, cell.ColumnNumber + 1].PossibleMove = true;
+                                    else
+                                        Board._area[cell.RowNumber - 2, cell.ColumnNumber + 1].PossibleMove = false;
+                                }
+
+                                if (InsideBorder(cell.RowNumber + 1, cell.ColumnNumber + 2) == true)
+                                {
+                                    WhichPlayersPiece(cell, cell.RowNumber + 1, cell.ColumnNumber + 2);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty)
+                                        Board._area[cell.RowNumber + 1, cell.ColumnNumber + 2].PossibleMove = true;
+                                    else
+                                        Board._area[cell.RowNumber + 1, cell.ColumnNumber + 2].PossibleMove = false;
+                                }
+
+                                if (InsideBorder(cell.RowNumber + 1, cell.ColumnNumber - 2) == true)
+                                {
+                                    WhichPlayersPiece(cell, cell.RowNumber + 1, cell.ColumnNumber - 2);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty)
+                                        Board._area[cell.RowNumber + 1, cell.ColumnNumber - 2].PossibleMove = true;
+                                    else
+                                        Board._area[cell.RowNumber + 1, cell.ColumnNumber - 2].PossibleMove = false;
+                                }
+
+                                if (InsideBorder(cell.RowNumber - 1, cell.ColumnNumber - 2) == true)
+                                {
+                                    WhichPlayersPiece(cell, cell.RowNumber - 1, cell.ColumnNumber - 2);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty)
+                                        Board._area[cell.RowNumber - 1, cell.ColumnNumber - 2].PossibleMove = true;
+                                    else
+                                        Board._area[cell.RowNumber - 1, cell.ColumnNumber - 2].PossibleMove = false;
+                                }
+
+                                if (InsideBorder(cell.RowNumber - 1, cell.ColumnNumber + 2) == true)
+                                {
+                                    WhichPlayersPiece(cell, cell.RowNumber - 1, cell.ColumnNumber + 2);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty)
+                                        Board._area[cell.RowNumber - 1, cell.ColumnNumber + 2].PossibleMove = true;
+                                    else
+                                        Board._area[cell.RowNumber - 1, cell.ColumnNumber + 2].PossibleMove = false;
+                                }
+                            }
+                            break;
+                        case State.BlackRook:
+                            if (InsideBorder(cell.RowNumber, cell.ColumnNumber) == true)
+                            {
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i >= 0 && InsideBorder(i, cell.ColumnNumber); i--)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[i, cell.ColumnNumber].PossibleMove = true;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[i, cell.ColumnNumber].PossibleMove = false;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j == cell.ColumnNumber)
+                                        i = i - 8;
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i < 8 && InsideBorder(i, cell.ColumnNumber); i++)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[i, cell.ColumnNumber].PossibleMove = true;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[i, cell.ColumnNumber].PossibleMove = false;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j == cell.ColumnNumber)
+                                        i = i + 8;
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; j >= 0 && InsideBorder(cell.RowNumber, j); j--)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i == cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[cell.RowNumber, j].PossibleMove = true;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[cell.RowNumber, j].PossibleMove = false;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j != cell.ColumnNumber)
+                                        j = j - 8;
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; j < 8 && InsideBorder(cell.RowNumber, j); j++)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i == cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[cell.RowNumber, j].PossibleMove = true;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[cell.RowNumber, j].PossibleMove = false;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j != cell.ColumnNumber)
+                                        j = j + 8;
+                                }
+                            }
+                            break;
+
+                        case State.BlackQueen:
+                            if (InsideBorder(cell.RowNumber, cell.ColumnNumber) == true)
+                            {
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i >= 0 && InsideBorder(i, cell.ColumnNumber); i--)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[i, cell.ColumnNumber].PossibleMove = true;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[i, cell.ColumnNumber].PossibleMove = false;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j == cell.ColumnNumber)
+                                        i = i - 8;
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i < 8 && InsideBorder(i, cell.ColumnNumber); i++)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[i, cell.ColumnNumber].PossibleMove = true;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[i, cell.ColumnNumber].PossibleMove = false;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j == cell.ColumnNumber)
+                                        i = i + 8;
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; j >= 0 && InsideBorder(cell.RowNumber, j); j--)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i == cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[cell.RowNumber, j].PossibleMove = true;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[cell.RowNumber, j].PossibleMove = false;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j != cell.ColumnNumber)
+                                        j = j - 8;
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; j < 8 && InsideBorder(cell.RowNumber, j); j++)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i == cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[cell.RowNumber, j].PossibleMove = true;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j == cell.ColumnNumber)
+                                        Board._area[cell.RowNumber, j].PossibleMove = false;
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i == cell.RowNumber && j != cell.ColumnNumber)
+                                        j = j + 8;
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i >= 0 && j < 8 && InsideBorder(i, j) == true; i--, j++)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[i, j].PossibleMove = true;
+                                    else if (i == cell.RowNumber && j == cell.ColumnNumber)
+                                    {
+                                        Board._area[i, j].PossibleMove = false;
+                                    }
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        i = i - 8;
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i >= 0 && j >= 0 && InsideBorder(i, j); i--, j--)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[i, j].PossibleMove = true;
+                                    else if (i == cell.RowNumber && j == cell.ColumnNumber)
+                                    {
+                                        Board._area[i, j].PossibleMove = false;
+                                    }
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        i = i - 8;
+
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i < 8 && j < 8 && InsideBorder(i, j) == true; i++, j++)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[i, j].PossibleMove = true;
+                                    else if (i == cell.RowNumber && j == cell.ColumnNumber)
+                                    {
+                                        Board._area[i, j].PossibleMove = false;
+                                    }
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        i = i + 8;
+
+                                }
+                                i = cell.RowNumber;
+                                j = cell.ColumnNumber;
+                                for (; i < 8 && j >= 0 && InsideBorder(i, j) == true; i++, j--)
+                                {
+                                    WhichPlayersPiece(cell, i, j);
+                                    if (IsItWhitesPiece == true || cell.State == State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        Board._area[i, j].PossibleMove = true;
+                                    else if (i == cell.RowNumber && j == cell.ColumnNumber)
+                                    {
+                                        Board._area[i, j].PossibleMove = false;
+                                    }
+                                    else if (IsItWhitesPiece == false && cell.State != State.Empty && i != cell.RowNumber && j != cell.ColumnNumber)
+                                        i = i + 8;
+                                }
+                            }
+                            break;
+                        case State.Empty:
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

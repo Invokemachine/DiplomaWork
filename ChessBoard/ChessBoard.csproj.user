@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AboutCreator.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\ChessPiece.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -14,6 +17,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="LanguageSettingsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PuzzlesWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="RulesWindow.xaml.cs">
@@ -26,6 +32,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="AboutCreator.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Controls\ChessPiece.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -39,6 +48,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="PlayWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PuzzlesWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="RulesWindow.xaml">

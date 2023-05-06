@@ -23,12 +23,10 @@
         <StackPanel Grid.Row="1"  Grid.ColumnSpan="3">
             <Button x:Name="PlayButton" Content="Play" Click="PlayButton_Click"></Button>
             <Button x:Name="ToTheoryButton" Content="Theory" Click="ToTheoryButton_Click"></Button>
-            <Button x:Name="ToPuzzlesButton" Content="Puzzles"></Button>
+            <Button x:Name="ToPuzzlesButton" Content="Puzzles" Click="ToPuzzlesButton_Click"></Button>
             <Button x:Name="ToHistoryButton" Content="Game's history" Click="ToHistoryButton_Click"></Button>
             <Button x:Name="ToLanguageChanging" Content="Language" Click="ToLanguageChanging_Click"></Button>
-            <Button x:Name="AboutCreatorButton" Content="Creator"></Button>
-            <Label x:Name="SpeechRecognitionTestLabel" Content="Recognized text" HorizontalAlignment="Center"/>
-            <ToggleButton x:Name="EnableListeningButton" Height="20" Width="30"/>
+            <Button x:Name="AboutCreatorButton" Content="Creator" Click="AboutCreatorButton_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

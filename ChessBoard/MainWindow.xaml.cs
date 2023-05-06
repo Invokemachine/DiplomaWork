@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Speech.Synthesis;
 
 namespace DiplomaApp
 {
@@ -22,7 +23,6 @@ namespace DiplomaApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SpeechRecognitionEngine speechRecognizer = new SpeechRecognitionEngine();
 
         public MainWindow()
         {
@@ -62,85 +62,6 @@ namespace DiplomaApp
             }
         }
 
-        private void speechRecognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
-        {
-            SpeechRecognitionTestLabel.Content = e.Result.Text;
-            /*
-            string FinalResult;
-            FinalResult = Convert.ToString(e.Result);
-            int i = Convert.ToInt(e.Result.Words[0].Text.ToLower());
-            int j = Convert.ToInt(e.Result.Words[0].Text.ToLower());
-
-            for(int i=0; i<FinalResult.Length; i++)
-            {
-                switch(j)
-				{
-					case "a":
-                        j = 0;
-						break;
-					case "b":
-                        j = 1;
-						break;
-					case "c":
-                        j = 2;
-                        break;
-                    case "d":
-                        j = 3;
-						break;
-					case "e":
-                        j = 4;
-						break;
-					case "f":
-                        j = 5;
-						break;
-                    case "g":
-                        j = 6;
-						break;
-					case "h":
-                        j = 7;
-						break;
-				}
-                switch(i)
-				{
-					case "1":
-                        i = 0;                        
-						break;
-					case "2":
-                        i = 1;  
-						break;
-					case "3":
-                        i = 2;  
-                        break;
-                    case "4":
-                        i = 3;  
-						break;
-					case "5":
-                        i = 4;  
-						break;
-					case "6":
-                        i = 5;  
-						break;
-                    case "7":
-                        i = 6;  
-						break;
-					case "8":
-                        i = 7;  
-						break;
-                if(InsideBorder(i,j) == true && Board._area[i,j].PossibleMove == true)
-                    CellCommand(cell,i,j);
-                else
-                    MessageBox.Show("Chosen move is impossible");
-                break;
-				}
-            }
-             */
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            speechRecognizer.Dispose();
-        }
-
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             PlayWindow toPlayWindow = new();
@@ -170,12 +91,18 @@ namespace DiplomaApp
             Close();
         }
 
-        private void EnableListeningButton_Click(object sender, RoutedEventArgs e)
+        private void AboutCreatorButton_Click(object sender, RoutedEventArgs e)
         {
-            if (EnableListeningButton.IsChecked == true == true)
-                speechRecognizer.RecognizeAsync(RecognizeMode.Multiple);
-            else
-                speechRecognizer.RecognizeAsyncStop();
+            AboutCreator aboutCreator = new();
+            aboutCreator.Show();
+            Close();
+        }
+
+        private void ToPuzzlesButton_Click(object sender, RoutedEventArgs e)
+        {
+            PuzzlesWindow puzzlesWindow = new();
+            puzzlesWindow.Show();
+            Close();
         }
     }
 }

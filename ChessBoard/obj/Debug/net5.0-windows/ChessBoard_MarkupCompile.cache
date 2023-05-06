@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\AzatYTebiLove\Desktop\ChessBoard\ChessBoard\App.xaml
-6-2094756682
+8-46145758
 
-161622863230
+1812906680
 1951150242663
-Controls\ChessPiece.xaml;HistoryWindow.xaml;LanguageSettingsWindow.xaml;MainWindow.xaml;PlayWindow.xaml;RulesWindow.xaml;
+AboutCreator.xaml;Controls\ChessPiece.xaml;HistoryWindow.xaml;LanguageSettingsWindow.xaml;MainWindow.xaml;PlayWindow.xaml;PuzzlesWindow.xaml;RulesWindow.xaml;
 
 False
 
