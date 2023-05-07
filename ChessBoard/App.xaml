@@ -5,7 +5,6 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-
             <Style TargetType="Button">
                 <Setter Property="Height" Value="50"/>
                 <Setter Property="FontFamily" Value="Segoe UI Black"/>
@@ -28,7 +27,6 @@
                 <Setter Property="TextAlignment" Value="Justify"/>
                 <Setter Property="IsEnabled" Value="False"/>
             </Style>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>
