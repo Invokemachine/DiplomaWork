@@ -56,38 +56,99 @@ namespace ChessBoard
         {
             Cell cell = (Cell)parameter;
             Cell activeCell = Board.FirstOrDefault(x => x.Active);
-            if (cell.State != State.Empty)
+            if(CurrentPlayer == 1)
             {
-                if (!cell.Active && activeCell != null)
+                WhichPlayersPiece(cell, cell.RowNumber, cell.ColumnNumber);
+                if (cell.State != State.Empty && IsItWhitesPiece == true)
                 {
-                    activeCell.Active = false;
+                    if (!cell.Active && activeCell != null)
+                    {
+                        activeCell.Active = false;
+                        DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                    }
+                    cell.Active = !cell.Active;
+                }
+                else if (activeCell != null && IsItWhitesPiece == false)
+                {
+                    if (cell.PossibleMove == true)
+                    {
+                        activeCell.Active = false;
+                        cell.State = activeCell.State;
+                        activeCell.State = State.Empty;
+                        DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                        SwitchPlayer();
+                    }
+                }
+                else if (activeCell == null)
+                    DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                else
+                {
+                    if(IsItWhitesPiece == true)
+                    {
+                        activeCell.Active = true;
+                        cell.State = activeCell.State;
+                        DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                    }
+                }
+                MarkLegalMoves(activeCell, cell);
+                if (!cell.Active)
+                {
                     DeleteMarks(cell.RowNumber, cell.ColumnNumber);
                 }
-                cell.Active = !cell.Active;
             }
-            else if (activeCell != null)
+            else if(CurrentPlayer != 1)
             {
-                if (cell.PossibleMove == true)
+                WhichPlayersPiece(cell, cell.RowNumber, cell.ColumnNumber);
+                if (cell.State != State.Empty && IsItWhitesPiece == false)
                 {
-                    activeCell.Active = false;
-                    cell.State = activeCell.State;
-                    activeCell.State = State.Empty;
-                    DeleteMarks(cell.RowNumber, cell.ColumnNumber);
-                    SwitchPlayer();
+                    if (!cell.Active && activeCell != null)
+                    {
+                        activeCell.Active = false;
+                        DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                    }
+                    cell.Active = !cell.Active;
                 }
-            }
-            else if (activeCell == null)
-                DeleteMarks(cell.RowNumber, cell.ColumnNumber);
-            else
-            {
-                activeCell.Active = true;
-                cell.State = activeCell.State;
-                DeleteMarks(cell.RowNumber, cell.ColumnNumber);
-            }
-            MarkLegalMoves(activeCell, cell);
-            if (!cell.Active)
-            {
-                DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                else if (activeCell != null)
+                {
+                    if(cell.State == State.Empty)
+                    {
+                        if (cell.PossibleMove == true)
+                        {
+                            activeCell.Active = false;
+                            cell.State = activeCell.State;
+                            activeCell.State = State.Empty;
+                            DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                            SwitchPlayer();
+                        }
+                    }
+                    else if(IsItWhitesPiece == true)
+                    {
+                        if (cell.PossibleMove == true)
+                        {
+                            activeCell.Active = false;
+                            cell.State = activeCell.State;
+                            activeCell.State = State.Empty;
+                            DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                            SwitchPlayer();
+                        }
+                    }
+                }
+                else if (activeCell == null)
+                    DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                else
+                {
+                    if (IsItWhitesPiece == false && cell.State != State.Empty)
+                    {
+                        activeCell.Active = true;
+                        cell.State = activeCell.State;
+                        DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                    }
+                }
+                MarkLegalMoves(activeCell, cell);
+                if (!cell.Active)
+                {
+                    DeleteMarks(cell.RowNumber, cell.ColumnNumber);
+                }
             }
         }, parameter => parameter is Cell cell && (Board.Any(x => x.Active) || cell.State != State.Empty));
 
